@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.sulake.proto</groupId>
+  <artifactId>orbit-infinispan</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <properties>
+    <orbit.version>1.14.0</orbit.version>
+    <log4j.version>2.7</log4j.version>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.target.jdk>1.8</project.target.jdk>
+    <project.source.jdk>1.8</project.source.jdk>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-bom</artifactId>
+        <version>${log4j.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j-impl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-jcl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-jul</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>cloud.orbit</groupId>
+      <artifactId>orbit-core</artifactId>
+      <version>${orbit.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>cloud.orbit</groupId>
+      <artifactId>orbit-runtime</artifactId>
+      <version>${orbit.version}</version>
+      <exclusions>
+        <!-- included below to ensure latest jboss-logging is in the classpath -->
+        <exclusion>
+          <groupId>cloud.orbit</groupId>
+          <artifactId>orbit-infinispan-cluster</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>org.infinispan</groupId>
+      <artifactId>infinispan-core</artifactId>
+      <version>10.1.0.Final</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <source>${project.source.jdk}</source>
+          <target>${project.target.jdk}</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
